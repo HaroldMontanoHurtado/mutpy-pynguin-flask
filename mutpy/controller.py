@@ -1,6 +1,5 @@
 import random
 import sys
-import time
 
 from mutpy import views, utils
 
@@ -57,7 +56,9 @@ class MutationController(views.ViewNotifier):
         self.timeout_factor = timeout_factor
         self.stdout_manager = utils.StdoutManager(disable_stdout)
         self.mutation_number = mutation_number
-        self.runner = runner_cls(self.test_loader, self.timeout_factor, self.stdout_manager, mutate_covered)
+        self.score = None
+        if runner_cls:
+            self.runner = runner_cls(self.test_loader, self.timeout_factor, self.stdout_manager, mutate_covered)
 
     def run(self):
         self.notify_initialize(self.target_loader.names, self.test_loader.names)
@@ -82,7 +83,12 @@ class MutationController(views.ViewNotifier):
             self.score = MutationScore()
 
             for target_module, to_mutate in self.target_loader.load([module for module, *_ in test_modules]):
-                self.mutate_module(target_module, to_mutate, total_duration)
+                mutant_modules, coverage_result = self.inject_coverage_and_mutate_module(target_module, to_mutate)
+                for mutant_module, mutations in mutant_modules:
+                    if mutant_module:
+                        self.run_tests_with_mutant(total_duration, mutant_module, mutations, coverage_result)
+                    else:
+                        self.score.inc_incompetent()
         except KeyboardInterrupt:
             pass
 
@@ -105,11 +111,15 @@ class MutationController(views.ViewNotifier):
         return self.runner.run_test(test_module, target_test)
 
     @utils.TimeRegister
-    def mutate_module(self, target_module, to_mutate, total_duration):
+    def inject_coverage_and_mutate_module(self, target_module, to_mutate):
         target_ast = self.create_target_ast(target_module)
         coverage_injector, coverage_result = self.inject_coverage(target_ast, target_module)
         if coverage_injector:
             self.score.update_coverage(*coverage_injector.get_result())
+        mutant_modules = self.mutate_module(target_module, to_mutate, target_ast, coverage_injector)
+        return mutant_modules, coverage_result
+
+    def mutate_module(self, target_module, to_mutate, target_ast, coverage_injector=None):
         for mutations, mutant_ast in self.mutant_generator.mutate(target_ast, to_mutate, coverage_injector,
                                                                   module=target_module):
             mutation_number = self.score.all_mutants + 1
@@ -117,11 +127,7 @@ class MutationController(views.ViewNotifier):
                 self.score.inc_incompetent()
                 continue
             self.notify_mutation(mutation_number, mutations, target_module, mutant_ast)
-            mutant_module = self.create_mutant_module(target_module, mutant_ast)
-            if mutant_module:
-                self.run_tests_with_mutant(total_duration, mutant_module, mutations, coverage_result)
-            else:
-                self.score.inc_incompetent()
+            yield self.create_mutant_module(target_module, mutant_ast), mutations
 
     def inject_coverage(self, target_ast, target_module):
         return self.runner.inject_coverage(target_ast, target_module)
