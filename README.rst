@@ -1,7 +1,13 @@
-MutPy
-=====
+MutPy-Pynguin
+=============
 
-|Python Versions| |Build Status| |Coverage Status| |Code Climate|
+This is a fork of the original `MutPy <https://github.com/mutpy/mutpy>`_.
+It fixes the long-standing issue that MutPy did not work properly on Python
+3.8+, which was caused by changes in Python's AST.
+Furthermore, this fork drops support for Python < 3.8;
+the respective code will be removed in the future.
+
+|Python Versions|
 
 MutPy is a mutation testing tool for Python 3.3+ source code. MutPy
 supports standard unittest module, generates YAML/HTML reports and has
@@ -252,11 +258,8 @@ MutPy was developed as part of engineer's and master’s thesis at
 Institute of Computer Science, Faculty of Electronics and Information
 Technology, Warsaw University of Technology.
 
-.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/MutPy.svg
-   :target: https://github.com/mutpy/mutpy
-.. |Build Status| image:: https://travis-ci.org/mutpy/mutpy.svg?branch=master
-   :target: https://travis-ci.org/mutpy/mutpy
-.. |Coverage Status| image:: https://coveralls.io/repos/github/mutpy/mutpy/badge.svg?branch=master
-   :target: https://coveralls.io/github/mutpy/mutpy?branch=master
-.. |Code Climate| image:: https://codeclimate.com/github/mutpy/mutpy/badges/gpa.svg
-   :target: https://codeclimate.com/github/mutpy/mutpy
+Maintenance of this fork is done at the Chair of Software Engineering II,
+Faculty of Computer Science and Mathematics, University of Passau, Germany.
+
+.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/MutPy-Pynguin.svg
+   :target: https://github.com/se2p/mutpy-pynguin
