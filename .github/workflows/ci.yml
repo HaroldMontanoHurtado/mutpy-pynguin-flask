@@ -22,4 +22,4 @@ jobs:
           pip install -r ./requirements/development.txt
 
       - name: Run tests with pytest
-        run: pytest -vv
+        run: pytest --cov=mutpy --cov-branch --cov-report=term-missing
