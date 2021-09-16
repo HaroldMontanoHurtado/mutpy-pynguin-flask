@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
-
 import sys
 
 from setuptools import setup
 
 import mutpy
 
-if sys.hexversion < 0x3030000:
-    print('MutPy requires Python 3.3 or newer!')
+if sys.version_info < (3,8):
+    print('MutPy-Pynguin requires Python 3.8 or newer!')
     sys.exit()
 
 with open('requirements/production.txt') as f:
@@ -17,15 +15,17 @@ with open('README.rst') as f:
     long_description = f.read()
 
 setup(
-    name='MutPy',
+    name='MutPy-Pynguin',
     version=mutpy.__version__,
-    python_requires='>=3.3',
+    python_requires='>=3.8',
     description='Mutation testing tool for Python 3.x source code.',
     long_description=long_description,
     author='Konrad Hałas',
     author_email='halas.konrad@gmail.com',
-    url='https://github.com/mutpy/mutpy',
-    download_url='https://github.com/mutpy/mutpy',
+    maintainer='Stephan Lukasczyk',
+    maintainer_email='stephan.lukasczyk@uni-passau.de',
+    url='https://github.com/se2p/mutpy-pynguin',
+    download_url='https://github.com/se2p/mutpy-pynguin',
     packages=['mutpy', 'mutpy.operators', 'mutpy.test_runners'],
     package_data={'mutpy': ['templates/*.html']},
     scripts=['bin/mut.py'],
@@ -35,11 +35,8 @@ setup(
     },
     test_suite='mutpy.test',
     classifiers=[
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Testing',
