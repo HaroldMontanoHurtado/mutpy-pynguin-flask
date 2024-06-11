@@ -85,7 +85,7 @@ class RelationalOperatorReplacement(MutationOperator):
         return ast.Gt()
 
     def mutate_Eq(self, node):
-        print('\nES IGUAL?\n') # ENSAYO1: Probar donde se ubica la impresion del texto
+        
         return ast.NotEq()
 
     def mutate_NotEq(self, node):

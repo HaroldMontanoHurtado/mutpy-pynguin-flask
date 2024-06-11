@@ -14,6 +14,15 @@ class AbstractArithmeticOperatorReplacement(MutationOperator):
 
     def mutate_Add(self, node):
         if self.should_mutate(node):
+            # Originalmente, cambia suma -> resta
+            #return ast.Sub()
+            #Ahora cambiará la suma -> multiplicacion
+            return ast.Mult()
+        raise MutationResign()
+    
+    # Creé una nueva mutación: suma -> resta
+    def mutate_Add_to_Sub(self, node):
+        if self.should_mutate(node):
             return ast.Sub()
         raise MutationResign()
 
