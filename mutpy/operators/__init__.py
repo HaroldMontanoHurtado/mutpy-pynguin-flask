@@ -1,4 +1,5 @@
 from .arithmetic import *
+from .security import * ## Se añadió
 from .base import *
 from .decorator import *
 from .exception import *
@@ -15,6 +16,11 @@ SuperCallingInsert = utils.get_by_python_version([
 standard_operators = {
     ArithmeticOperatorDeletion,
     ArithmeticOperatorReplacement,
+    
+    # se añadió
+    SecurityOperatorDeletion,
+    SecurityOperatorReplacement,
+    
     AssignmentOperatorReplacement,
     BreakContinueReplacement,
     ConditionalOperatorDeletion,

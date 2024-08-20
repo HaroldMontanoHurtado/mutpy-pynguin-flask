@@ -18,7 +18,6 @@ class AbstractSecurityOperatorReplacement(MutationOperator):
         raise MutationResign()
 
 
-
 class SecurityOperatorReplacement(AbstractSecurityOperatorReplacement):
     def should_mutate(self, node):
         return not isinstance(node.parent, ast.AugAssign)
