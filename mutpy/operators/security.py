@@ -16,14 +16,12 @@ class AbstractSecurityOperatorReplacement(MutationOperator):
         if self.should_mutate(node):
             return ast.Mult()
         raise MutationResign()
+    
+    def mutate_Eq_to_Lt(self, node):
+        return ast.Lt()
 
 
 class SecurityOperatorReplacement(AbstractSecurityOperatorReplacement):
     def should_mutate(self, node):
         return not isinstance(node.parent, ast.AugAssign)
 
-    def mutate_USub(self, node):
-        return ast.UAdd()
-
-    def mutate_UAdd(self, node):
-        return ast.USub()
