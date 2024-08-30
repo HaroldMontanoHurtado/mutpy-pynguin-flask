@@ -60,33 +60,32 @@ class LogicalOperatorReplacement(MutationOperator):
 
 
 class RelationalOperatorReplacement(MutationOperator):
-    def mutate_Lt(self, node):
+    def mutate_Lt(self, node): # less that -> great that
         return ast.Gt()
 
-    def mutate_Lt_to_LtE(self, node):
+    def mutate_Lt_to_LtE(self, node): # less that -> less or equal
         return ast.LtE()
 
-    def mutate_Gt(self, node):
+    def mutate_Gt(self, node): # great that
         return ast.Lt()
 
-    def mutate_Gt_to_GtE(self, node):
+    def mutate_Gt_to_GtE(self, node): # great that -> great or equal
         return ast.GtE()
 
-    def mutate_LtE(self, node):
+    def mutate_LtE(self, node): # less or equal -> great or equal
         return ast.GtE()
 
-    def mutate_LtE_to_Lt(self, node):
+    def mutate_LtE_to_Lt(self, node): # less or equal -> less that
         return ast.Lt()
 
-    def mutate_GtE(self, node):
+    def mutate_GtE(self, node): # great or equal -> less or equal
         return ast.LtE()
 
-    def mutate_GtE_to_Gt(self, node):
+    def mutate_GtE_to_Gt(self, node): # great or equal -> great that
         return ast.Gt()
 
-    def mutate_Eq(self, node):
-        
+    def mutate_Eq(self, node): # equal -> not equal
         return ast.NotEq()
 
-    def mutate_NotEq(self, node):
+    def mutate_NotEq(self, node): # not equal -> equal
         return ast.Eq()
