@@ -1,0 +1,26 @@
+Redacción dirigida al profesor Carlos Delgado.
+
+En la clase Utils, en mutpy>utils.py , casi al final del código (linea 397) está la
+función create_ast(code), la cual es usada en la clase controller.py (linea 138).
+La funcion create_ast(code) , recibe un atributo 'code', el cual es de tipo 'str'
+y es el texto del archivo target.
+
+Se le agregó un print-test (linea 444) con el cual imprimo el target del ast_tree. Y
+al correr el mutpy con la app dummy, se ejecuta correctamente y se imprime el ast_tree
+del target, o sea, el ast de las pruebas.
+
+Se modificó la función sort_operators(operators), para que imprimiera los operadores
+almacenados (linea 467).
+
+Tenia en mente agregar en utils las funciones que usted creó para escribir las
+configuraciones del flask, pero desconozco si se pueda, debido a que el target
+apunta a un archivo de pruebas unitarias, y no sobre la misma app.py , como si
+lo hace en su ejemplo.
+
+primero intenté creando la funcion fuera, junto a create_ast(code), así tendría a mi
+alcance el code, pero también necesito el path, y solo supe conseguirlo pasando
+la funcion dentro de la class ModulesLoader:, pero así pierdo acceso al code. Y
+requiero de ambos (code y path) para que la función que me enseñó, funcione.
+
+¿Con esta información como puedo proceder a hacer cambios?
+
