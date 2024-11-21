@@ -16,11 +16,6 @@ SuperCallingInsert = utils.get_by_python_version([
 standard_operators = {
     ArithmeticOperatorDeletion,
     ArithmeticOperatorReplacement,
-    
-    # se añadió
-    SecurityOperatorDeletion,
-    SecurityOperatorReplacement,
-    
     AssignmentOperatorReplacement,
     BreakContinueReplacement,
     ConditionalOperatorDeletion,
@@ -49,4 +44,7 @@ experimental_operators = {
     StatementDeletion,
     StaticmethodDecoratorInsertion,
     ZeroIterationLoop,
+    # se añadió
+    SecurityOperatorDeletion,
+    SecurityOperatorReplacement,
 }

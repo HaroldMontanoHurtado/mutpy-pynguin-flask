@@ -24,3 +24,8 @@ requiero de ambos (code y path) para que la función que me enseñó, funcione.
 
 ¿Con esta información como puedo proceder a hacer cambios?
 
+El archivo que ejecuta el mutpy se encuentra en bin>mut.py, que a su vez envia a otro
+archivo que contiene las lineas de comando que ejecutara, ubicado en mutpy>commandline.py
+
+PARSER: Se deber parsear para almacenar los argumento y así extraer el target de la App.py
+

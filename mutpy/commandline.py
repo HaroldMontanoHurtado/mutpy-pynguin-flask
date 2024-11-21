@@ -6,7 +6,10 @@ from mutpy import controller, views, operators, utils
 
 
 def main(argv):
+    #print('\n------------ testing main ------------\n')
     parser = build_parser()
+    #args_cfg = parser.parse_args()
+    #print(f'target: {args_cfg.target} \nunit_test: {args_cfg.unit_test}\n')
     run_mutpy(parser)
 
 
