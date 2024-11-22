@@ -457,20 +457,8 @@ def get_flask_cfg():
 
     # Capturar las configuraciones cargadas en app.config después de la ejecución
     if app:
-        config_output_filename = "config_output_after_execution.txt"
-        with open(config_output_filename, "w") as file:
-            file.write(
-                "Configuraciones encontradas en app.config después de la ejecución:\n"
-            )
-            for key, value in app.config.items():
-                file.write(f"{key}: {value}\n")
-                print(f"{key}: {value}")
+        for key, value in app.config.items():
+            print(f"{key}: {value}")
 
-        print(f"Configuraciones guardadas en {config_output_filename}")
-
-        # Guardar el AST del programa después de la ejecución
-        with open(ast_output_filename, "w") as file:
-            file.write(ast.dump(program, indent=4))
-        # print(f"AST después de la ejecución guardada en {ast_output_filename}")
     else:
         print("No se encontró la instancia de Flask 'app'.")
